@@ -38,43 +38,13 @@ $(document).ready(function () {
     return dict;
   };
 
-  var urlinput = document.querySelector('#urlinput');
-  var btn = document.querySelector('#scrapebtn');
-  var outputarea = document.querySelector('#outputarea');
-  var data = '';
-
-  //associative Array
-  var dict = {};
-
-  btn.addEventListener('click', function (e) {
-    var urlcontent = urlinput.value;
-    $.ajax({
-      url: 'scraper.php',
-      type: 'GET',
-      data: { "callFunc1": urlinput.value },
-      error: function error(d) {
-        alert("failed");
-        console.log(d);
-      },
-      success: function success(d) {
-        console.log('success');
-
-        data = parseFromText(d);
-        console.log(data);
-        var sspnums = crunch(data, dict);
-        console.log(sspnums);
-        outputarea.textContent = data;
-      }
-    });
-  });
-
   var DivisionContainer = function (_React$Component) {
     _inherits(DivisionContainer, _React$Component);
 
-    function DivisionContainer() {
+    function DivisionContainer(props) {
       _classCallCheck(this, DivisionContainer);
 
-      return _possibleConstructorReturn(this, (DivisionContainer.__proto__ || Object.getPrototypeOf(DivisionContainer)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (DivisionContainer.__proto__ || Object.getPrototypeOf(DivisionContainer)).call(this, props));
     }
 
     _createClass(DivisionContainer, [{
@@ -82,7 +52,7 @@ $(document).ready(function () {
       value: function render() {
         return React.createElement(
           'div',
-          null,
+          { className: 'divContainer' },
           React.createElement(
             'div',
             null,
@@ -125,5 +95,139 @@ $(document).ready(function () {
     return DivisionContainer;
   }(React.Component);
 
-  ReactDOM.render(React.createElement(DivisionContainer, { name: 'Revolver', manum: '3', exnum: '4', ssnum: '10', mmnum: '15', nonum: '20' }), document.getElementById('sspContainer'));
+  var UrlInputArea = function (_React$Component2) {
+    _inherits(UrlInputArea, _React$Component2);
+
+    function UrlInputArea() {
+      _classCallCheck(this, UrlInputArea);
+
+      return _possibleConstructorReturn(this, (UrlInputArea.__proto__ || Object.getPrototypeOf(UrlInputArea)).apply(this, arguments));
+    }
+
+    _createClass(UrlInputArea, [{
+      key: 'submitUrl',
+      value: function submitUrl() {
+
+        var urlinput = document.querySelector('#urlinput');
+        var btn = document.querySelector('#scrapebtn');
+        var outputarea = document.querySelector('#outputarea');
+        var data = '';
+
+        //associative Array
+        var dict = {};
+
+        if (urlinput) {
+          var urlcontent = urlinput.value;
+          $.ajax({
+            url: 'scraper.php',
+            type: 'GET',
+            data: { "callFunc1": urlinput.value },
+            error: function error(d) {
+              alert("failed");
+              console.log(d);
+            },
+            success: function success(d) {
+              console.log('success');
+
+              data = parseFromText(d);
+              var nums = crunch(data, dict);
+
+              console.log(nums);
+              //outputarea.textContent = data;
+            }
+          });
+        }
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        return React.createElement(
+          'div',
+          { id: 'urlinputarea' },
+          React.createElement('input', { id: 'urlinput', type: 'text', placeholder: 'Enter Squadding Url Here' }),
+          React.createElement(
+            'div',
+            { id: 'scrapebtn', onClick: this.submitUrl },
+            React.createElement('i', { className: 'fa fa-search' })
+          )
+        );
+      }
+    }]);
+
+    return UrlInputArea;
+  }(React.Component);
+
+  var OutputArea = function (_React$Component3) {
+    _inherits(OutputArea, _React$Component3);
+
+    function OutputArea(props) {
+      _classCallCheck(this, OutputArea);
+
+      return _possibleConstructorReturn(this, (OutputArea.__proto__ || Object.getPrototypeOf(OutputArea)).call(this, props));
+    }
+
+    _createClass(OutputArea, [{
+      key: 'render',
+      value: function render() {
+        return React.createElement(
+          'div',
+          { id: 'outputarea' },
+          React.createElement(
+            'div',
+            { className: 'outputareacolumn', id: 'outputareacolumn1' },
+            React.createElement(DivisionContainer, { name: 'SSP' }),
+            React.createElement(DivisionContainer, { name: 'ESP' }),
+            React.createElement(DivisionContainer, { name: 'CDP' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'outputareacolumn', id: 'outputareacolumn2' },
+            React.createElement(DivisionContainer, { name: 'CCP' }),
+            React.createElement(DivisionContainer, { name: 'BUG' }),
+            React.createElement(DivisionContainer, { name: 'REV' })
+          )
+        );
+      }
+    }]);
+
+    return OutputArea;
+  }(React.Component);
+
+  var AppContainer = function (_React$Component4) {
+    _inherits(AppContainer, _React$Component4);
+
+    function AppContainer() {
+      _classCallCheck(this, AppContainer);
+
+      return _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).apply(this, arguments));
+    }
+
+    _createClass(AppContainer, [{
+      key: 'render',
+      value: function render() {
+        return React.createElement(
+          'div',
+          { id: 'appcontainer' },
+          React.createElement(
+            'div',
+            { id: 'titlecontainer' },
+            React.createElement(
+              'span',
+              { className: 'titleSpan' },
+              'Practiscore Squad Scraper'
+            )
+          ),
+          React.createElement(UrlInputArea, null),
+          React.createElement(OutputArea, null)
+        );
+      }
+    }]);
+
+    return AppContainer;
+  }(React.Component);
+
+  ReactDOM.render(
+  /*<DivisionContainer name='Revolver' manum='3' exnum='4' ssnum='10' mmnum='15' nonum='20'/>,
+  document.getElementById('sspContainer')*/
+  React.createElement(AppContainer, null), document.querySelector('#shell'));
 });
