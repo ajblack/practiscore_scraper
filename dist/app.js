@@ -44,10 +44,25 @@ $(document).ready(function () {
     function DivisionContainer(props) {
       _classCallCheck(this, DivisionContainer);
 
-      return _possibleConstructorReturn(this, (DivisionContainer.__proto__ || Object.getPrototypeOf(DivisionContainer)).call(this, props));
+      var _this = _possibleConstructorReturn(this, (DivisionContainer.__proto__ || Object.getPrototypeOf(DivisionContainer)).call(this, props));
+
+      _this.state = {
+        name: _this.props.name,
+        ma: 0,
+        ex: 0,
+        ss: 0,
+        mm: 0,
+        no: 0
+      };
+      return _this;
     }
 
     _createClass(DivisionContainer, [{
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        console.log('divisioncontainer updated');
+      }
+    }, {
       key: 'render',
       value: function render() {
         return React.createElement(
@@ -56,37 +71,37 @@ $(document).ready(function () {
           React.createElement(
             'div',
             null,
-            this.props.name
+            this.state.name
           ),
           React.createElement(
             'div',
             null,
             'Master: ',
-            this.props.manum
+            this.state.ma
           ),
           React.createElement(
             'div',
             null,
             'Expert: ',
-            this.props.exnum
+            this.state.ex
           ),
           React.createElement(
             'div',
             null,
             'Sharpshooter: ',
-            this.props.ssnum
+            this.state.ss
           ),
           React.createElement(
             'div',
             null,
             'Marksman: ',
-            this.props.mmnum
+            this.state.mm
           ),
           React.createElement(
             'div',
             null,
             'Novice: ',
-            this.props.nonum
+            this.state.no
           )
         );
       }
@@ -98,16 +113,16 @@ $(document).ready(function () {
   var UrlInputArea = function (_React$Component2) {
     _inherits(UrlInputArea, _React$Component2);
 
-    function UrlInputArea() {
+    function UrlInputArea(props) {
       _classCallCheck(this, UrlInputArea);
 
-      return _possibleConstructorReturn(this, (UrlInputArea.__proto__ || Object.getPrototypeOf(UrlInputArea)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (UrlInputArea.__proto__ || Object.getPrototypeOf(UrlInputArea)).call(this, props));
     }
 
     _createClass(UrlInputArea, [{
       key: 'submitUrl',
-      value: function submitUrl() {
-
+      value: function submitUrl(t) {
+        var self = t;
         var urlinput = document.querySelector('#urlinput');
         var btn = document.querySelector('#scrapebtn');
         var outputarea = document.querySelector('#outputarea');
@@ -133,21 +148,33 @@ $(document).ready(function () {
               var nums = crunch(data, dict);
 
               console.log(nums);
+              console.log('self here is:');
+              console.log(self);
+              self.setState({});
               //outputarea.textContent = data;
             }
           });
         }
       }
     }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        console.log('urlarea updated');
+      }
+    }, {
       key: 'render',
       value: function render() {
+        var _this3 = this;
+
         return React.createElement(
           'div',
           { id: 'urlinputarea' },
           React.createElement('input', { id: 'urlinput', type: 'text', placeholder: 'Enter Squadding Url Here' }),
           React.createElement(
             'div',
-            { id: 'scrapebtn', onClick: this.submitUrl },
+            { id: 'scrapebtn', onClick: function onClick() {
+                return _this3.submitUrl(_this3);
+              } },
             React.createElement('i', { className: 'fa fa-search' })
           )
         );
@@ -167,6 +194,11 @@ $(document).ready(function () {
     }
 
     _createClass(OutputArea, [{
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        console.log('outputarea updated');
+      }
+    }, {
       key: 'render',
       value: function render() {
         return React.createElement(

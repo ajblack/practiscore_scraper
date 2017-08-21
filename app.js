@@ -26,6 +26,7 @@ $(document).ready(function(){
       }
     })
 
+
     return dict;
 
   }
@@ -37,16 +38,26 @@ $(document).ready(function(){
 
     constructor(props){
       super(props);
+      this.state={
+        name:this.props.name,
+        ma:0,
+        ex:0,
+        ss:0,
+        mm:0,
+        no:0
+      }
     }
-
+    componentDidUpdate(){
+      console.log('divisioncontainer updated');
+    }
     render() {
       return <div className='divContainer'>
-      <div>{this.props.name}</div>
-      <div>Master: {this.props.manum}</div>
-      <div>Expert: {this.props.exnum}</div>
-      <div>Sharpshooter: {this.props.ssnum}</div>
-      <div>Marksman: {this.props.mmnum}</div>
-      <div>Novice: {this.props.nonum}</div>
+      <div>{this.state.name}</div>
+      <div>Master: {this.state.ma}</div>
+      <div>Expert: {this.state.ex}</div>
+      <div>Sharpshooter: {this.state.ss}</div>
+      <div>Marksman: {this.state.mm}</div>
+      <div>Novice: {this.state.no}</div>
       </div>
 
 
@@ -55,8 +66,12 @@ $(document).ready(function(){
 
   class UrlInputArea extends React.Component {
 
-    submitUrl(){
+    constructor(props){
+      super(props);
+    }
 
+    submitUrl(t){
+      var self = t;
       var urlinput = document.querySelector('#urlinput');
       var btn = document.querySelector('#scrapebtn');
       var outputarea = document.querySelector('#outputarea');
@@ -84,15 +99,22 @@ $(document).ready(function(){
             var nums = crunch(data, dict);
 
             console.log(nums);
+            console.log('self here is:');
+            console.log(self);
+            self.setState({});
             //outputarea.textContent = data;
           }
         });
       }
     }
+
+    componentDidUpdate(){
+      console.log('urlarea updated');
+    }
     render(){
       return <div id="urlinputarea">
         <input id='urlinput' type='text' placeholder="Enter Squadding Url Here"/>
-        <div id='scrapebtn' onClick={this.submitUrl}>
+        <div id='scrapebtn' onClick={() => this.submitUrl(this)}>
           <i className="fa fa-search"></i>
         </div>
       </div>
@@ -103,6 +125,10 @@ $(document).ready(function(){
     constructor(props){
       super(props);
 
+    }
+
+    componentDidUpdate(){
+      console.log('outputarea updated');
     }
     render(){
       return <div id='outputarea'>
