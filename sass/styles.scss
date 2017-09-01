@@ -74,7 +74,15 @@
         border-radius:5px;
         margin:10px;
         background-color:rgba(150,150,150,.5);
+        justify-content: center;
+        align-items: center;
+        padding-top:10px;
 
+        > *{
+          flex-basis:12.5%;
+
+        }
+/*
         .divTitleContainer{
           display:flex;
           flex-basis:20%;
@@ -88,7 +96,29 @@
           justify-content:center;
           align-items: center;
         }
+
+        */
       }
+    }
+  }
+
+  .loadingModal{
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+    position:fixed;
+    left:calc(50vw - 100px);
+    top:50px;
+    width:200px;
+    height:100px;
+    z-index: 10000;
+    justify-content:center;
+    align-items:center;
+
+
+    .loadingText{
+      position:absolute;
+      color:black;
+      font-size:1.5em;
     }
   }
 }

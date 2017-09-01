@@ -56,17 +56,43 @@
         flex-basis: 33.3%;
         border-radius: 5px;
         margin: 10px;
-        background-color: rgba(150, 150, 150, 0.5); }
-        #appcontainer #outputarea .outputareacolumn .divContainer .divTitleContainer {
-          display: flex;
-          flex-basis: 20%;
-          justify-content: center;
-          align-items: center; }
-        #appcontainer #outputarea .outputareacolumn .divContainer .divClassContainer {
-          display: flex;
-          flex-basis: 80%;
-          justify-content: center;
-          align-items: center; }
+        background-color: rgba(150, 150, 150, 0.5);
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+        /*
+        .divTitleContainer{
+          display:flex;
+          flex-basis:20%;
+          justify-content:center;
+          align-items: center;
+        }
+
+        .divClassContainer{
+          display:flex;
+          flex-basis:80%;
+          justify-content:center;
+          align-items: center;
+        }
+
+        */ }
+        #appcontainer #outputarea .outputareacolumn .divContainer > * {
+          flex-basis: 12.5%; }
+  #appcontainer .loadingModal {
+    background-color: white;
+    border-radius: 10px;
+    position: fixed;
+    left: calc(50vw - 100px);
+    top: 50px;
+    width: 200px;
+    height: 100px;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center; }
+    #appcontainer .loadingModal .loadingText {
+      position: absolute;
+      color: black;
+      font-size: 1.5em; }
 
 body {
   background-color: #5a595c;
