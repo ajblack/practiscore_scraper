@@ -36,7 +36,17 @@ class AppContainer extends React.Component {
     let dict = new Map();
     data.forEach(function(d){
       var dCells = d.split('');
-      let lookup = d[0]+d[1]+d[2]+d[6]+d[7];
+      //add a shim here to look up 'Revolver'
+      let lookup = '';
+      if(d[0]=='R' && d[1]=='e' &&d[2]=='v'){
+        console.log('revolver found');
+        lookup = d[0]+d[1]+d[2]+d[11]+d[12];
+        lookup = lookup.toUpperCase();
+        console.log(lookup);
+      }
+      else{
+        lookup = d[0]+d[1]+d[2]+d[6]+d[7];
+      }
       if(!dict.get(lookup)){
         dict.set(lookup, 1);
       }
