@@ -115,9 +115,7 @@ class AppContainer extends React.Component {
         </div>
       </div>
       <LoadingModal isShowing = {self.state.loading}/>
-      <IDPAOutputArea nums = {self.state.n}/>
-
-
+      {self.state.comp == 'idpa' ? <IDPAOutputArea nums = {self.state.n}/> : null}
     </div>
   }
 }
