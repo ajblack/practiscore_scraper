@@ -3,6 +3,17 @@
   flex-direction: column;
   color: white;
   font-family: sans-serif; }
+  #appcontainer #compoptions {
+    display: inline-block;
+    position: absolute;
+    padding: 5px;
+    right: 10px; }
+    #appcontainer #compoptions span[type=button] {
+      margin: 5px;
+      padding: 10px;
+      background-color: rgba(150, 150, 150, 0.5);
+      cursor: pointer;
+      border-radius: 5px; }
   #appcontainer #titlecontainer {
     display: flex;
     flex-direction: row;

@@ -4,6 +4,22 @@
   color:white;
   font-family: sans-serif;
 
+  #compoptions{
+    display: inline-block;
+    position: absolute;
+    padding:5px;
+    right: 10px;
+
+    span[type=button]{
+      margin:5px;
+      padding:10px;
+      background-color: rgba(150, 150, 150, 0.5);
+      cursor:pointer;
+      border-radius:5px;
+    }
+
+  }
+
   #titlecontainer{
     display: flex;
     flex-direction:row;
